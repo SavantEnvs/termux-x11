@@ -1,0 +1,8 @@
+# Build context for mayhem/Dockerfile: the full repo incl. .git; only local build outputs dropped.
+mayhem/build/
+xvfb-lorie
+ctrf-report.json
+**/__pycache__/
+.DS_Store
+*.swp
+*~

@@ -1,0 +1,14 @@
+project: savantenvs/termux-x11
+target: x11-client-clipboard
+
+# termux-x11's X server (the xserver it pins + its own lorie/clipboard.c) with one X11 client whose
+# whole byte stream (connection setup + requests) is the input file. `-core` makes the server
+# abort() (not exit(1)) on a fatal signal, so a crash is a crash.
+cmds:
+  - cmd: /mayhem/xvfb-lorie :99 -nolisten tcp -nolisten unix -nolock -terminate -core -screen 0 640x480x24 -fuzzinput @@
+    afl: true
+    timeout: 5
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/x11-client-clipboard/testsuite
